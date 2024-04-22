@@ -1,0 +1,56 @@
+<!--Il seguente sito presenterà un banner al centro-->
+<!--Non sarà possibile chiudere il banner poichè per farlo necessitiamo di supporti JavaScript-->
+<!--Vediamo solo come realizzarlo-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        main{
+            width: 70%;
+            margin: 0 auto; /*Imposto Margin-Top e Margin-Bottom a 0 e centriamo la pagina*/
+        }
+
+        .robot{             /*Classe definita per immettere nella pagina*/
+            float: left;    /*float serve ad allineare l'immagine a sinistra rispetto al contenitore padre (il main)-> gli altri elementi del main (come i paragrafi testuali) verranno posizionati a destra */
+            width: 140px;
+        }
+
+        .square{                /*definiamo proprietà del banner*/
+            position: fixed;    /*position serve a fissare la posizione della classe 'square' nella pagina. Mediante 'fixed', il banner sarà fisso rispetto alla finestra del browser, perciò scorrendo il testo verso il basso il rettangolo non cambierà la propria posizione. */
+            width: 700px;
+            height: 300px;
+            top: 50%;           /*centriamo il banner in altezza nella pagina (in realtà centriamo il suo angolo superiore sinistro)*/
+            left: 50%;          /*centriamo il banner in larghezza nella pagina (in realtà centriamo il suo angolo superiore sinistro)*/
+            transform: translate(-50%, -50%);   /*trasliamo il banner in tal modo da avere il centro nella posizione precedentemente occupata dall'angolo superiore sinistro -> otteniamo banner centrato*/
+            background-color: chocolate;
+            font-size: 200%;
+        }
+
+        .classe{        /*definiamo proprietà contenuto del banner, in particolare per il paragrafo contenente la X (fungerà da bottone per la chiusura)*/
+            position: absolute;     /*'absolute', a differenza di 'fixed' usato prima, ci permette di fissare il contenuto nel contenitore padre (ovvero il banner).*/
+            right: 5px;             /*l'utilizzo di absolute ci permette di definire a che distanza dal margine destro dovrà essere posizionata la X (se non avessimo impostato la position, la X sarebbe stata posizionata a 5px dal margine destro della finestra WEB*/
+            top: 0px;
+        }
+
+        .square p{
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Esempio</h1>
+        <div class="square"><p>Pubblicità</p><div class="classe"><p>X</p></div></div>
+        <img class="robot" src="https://cdn5.acolore.com/disegni/colori/201932/robot-alto-robots-1156119.jpg">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, saepe! Fugit ipsa inventore sunt ut obcaecati rerum dolorem perferendis dolores beatae nulla. Autem dolorem, odit illum aut quam labore blanditiis delectus iure nesciunt tenetur accusantium, distinctio sint, nemo neque harum! Sequi maiores excepturi inventore ipsam veniam earum molestiae accusamus necessitatibus harum hic. Repellat non ipsum expedita eaque doloribus quis, corporis natus recusandae aliquam temporibus nam ipsam at fugiat tempora velit eligendi maiores a labore. Voluptas ut numquam cumque inventore laboriosam nostrum veritatis aliquid debitis est commodi corporis delectus dicta beatae, dignissimos eveniet dolorum fugit, ullam ab, quos illum a eos.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo laboriosam nisi suscipit accusamus quam ab placeat corrupti, ipsum at debitis earum nobis in eligendi, aliquam voluptate! Nemo error sint possimus iste eum quos quisquam maiores molestias ipsam est! Consequuntur, eveniet voluptatum accusantium exercitationem pariatur in dicta molestias quos? Accusamus nemo distinctio totam dolorem alias molestias nobis, porro labore maxime explicabo velit cum, incidunt saepe consectetur minus quidem a? Modi itaque dolorum quibusdam aut, sit autem libero corrupti natus ratione enim doloremque cum, aperiam saepe porro ad dolore cupiditate molestiae blanditiis, consequatur rerum eius. Aut vitae similique blanditiis illo dolor excepturi, molestias, accusantium voluptas amet aspernatur voluptate aliquid aperiam, rerum expedita delectus officia labore explicabo sequi consequatur. Minima neque est itaque eius ducimus modi fugiat ullam doloribus autem excepturi odio, nobis tempore debitis perspiciatis mollitia obcaecati dolore consequuntur veniam explicabo! Praesentium ducimus et voluptates? Qui, sunt hic minima expedita ipsa aliquid, cum error reiciendis quis earum harum libero ipsum fugiat ducimus exercitationem numquam, necessitatibus obcaecati? Quod nesciunt recusandae, eius exercitationem tempora placeat. Consequuntur, quia tempora ut neque fuga officiis reprehenderit quam repellendus harum inventore quas quae expedita ea maxime ipsa libero, totam qui quis alias sunt ad sit blanditiis exercitationem. Possimus cupiditate voluptate labore dolor, nostrum adipisci molestias laborum iure inventore fugiat corrupti, recusandae praesentium in impedit incidunt dignissimos cum dolore dolores assumenda accusamus rerum ad, quam tempore odio. Quo inventore natus nam deserunt sit aut modi, voluptas hic ducimus alias consequatur sunt facere aliquam blanditiis quisquam ipsa magnam beatae. Culpa, qui aliquam fugiat vitae blanditiis nostrum quibusdam mollitia odit magni perspiciatis quaerat pariatur quidem voluptatem necessitatibus tempora ullam accusantium similique aut repellat ad voluptates suscipit quae. Fugit, nesciunt animi natus sapiente in repellendus illo, quae, molestiae explicabo et autem. Voluptatum commodi sit beatae. Possimus voluptate ipsa architecto aliquam iste praesentium animi, ex repellendus, iusto reprehenderit ut. Excepturi eveniet deleniti nostrum labore dicta sunt quidem sint explicabo voluptatum eum, amet quis neque veritatis quas accusantium aspernatur eligendi ut dolore? Aut ipsa officiis sunt eveniet, voluptate perferendis esse cumque ab. Magnam nisi libero recusandae. Consequatur nulla velit eveniet aspernatur doloribus quam accusantium dolorem delectus nemo! Suscipit rem est qui iure, velit temporibus voluptate quo sint ut ipsum facilis culpa laudantium corrupti obcaecati laborum molestias repellendus. Odio distinctio aspernatur ipsam eius possimus voluptatibus autem iure quisquam vero nisi soluta eos tenetur quia, perspiciatis earum inventore necessitatibus officia. Deleniti sapiente quod obcaecati asperiores perferendis molestias illum explicabo itaque maxime optio deserunt impedit nostrum nihil ratione, eius minus, illo consequatur tempore ea inventore aspernatur unde aut veritatis beatae. Ducimus quos nostrum, veniam quas quibusdam laboriosam ratione modi! Consectetur laboriosam molestias esse soluta! Aperiam repellat perspiciatis cum beatae ratione optio suscipit quisquam magni ipsum ullam facilis molestias reiciendis culpa, laboriosam totam? Natus beatae non eligendi dignissimos exercitationem? Ex a voluptate laboriosam, minima voluptas quaerat atque impedit quia nisi at rerum soluta, autem eos iste vero ullam et cumque sequi dolore dolor itaque eligendi eaque debitis! Mollitia deserunt veniam a sed optio ex inventore. Laudantium, ipsa placeat.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis amet, accusamus laudantium explicabo aut est ipsum labore ad culpa repellat, quis fugiat rerum minima mollitia unde quae magnam officiis saepe ex vero molestias cupiditate rem, sunt ea? Illo perspiciatis magni voluptates facere possimus odio delectus fugit harum repellat eligendi laborum molestiae est in nihil unde alias ea consectetur distinctio corporis deserunt illum, obcaecati nesciunt sit eaque! Dicta nostrum, quae esse maxime dolore corrupti nam, neque eligendi exercitationem nisi distinctio id repellat optio expedita at molestias atque et voluptas commodi ab nesciunt, odio ullam? Quibusdam sit ipsa porro adipisci quis ducimus obcaecati, laboriosam culpa distinctio aut fugiat aperiam sapiente minima fuga alias, asperiores dolorem doloremque quia nemo? Natus dolores, ipsum officia inventore a sequi reprehenderit nihil temporibus quibusdam aperiam tenetur nisi commodi voluptatum eligendi? Fuga fugiat cupiditate nisi, repellat consequatur ad mollitia sequi dolor! Cumque architecto totam, veniam eligendi nulla ab vitae, accusamus impedit modi voluptatum quidem. Voluptate esse architecto, ad asperiores modi assumenda ratione recusandae temporibus debitis illo, voluptates laborum illum suscipit iusto. Necessitatibus suscipit quod corrupti cumque facilis ullam nemo iste voluptate id quis officia accusantium veritatis provident, in magni rerum rem ad alias maiores fugiat eveniet unde ipsum debitis! Ab laboriosam fugit natus minima vero dolore ad necessitatibus, sed ipsum itaque debitis commodi quas modi ea voluptatibus reprehenderit est! Itaque unde natus quas asperiores magni, fuga facere laudantium necessitatibus dolores amet? Modi deleniti accusantium consequatur quia laudantium vero hic, voluptate animi voluptatum iure expedita iste libero illo nesciunt, suscipit repudiandae ad saepe beatae? Quaerat, officia necessitatibus soluta iste ipsam ipsum eius nobis ea vel illum cum magni debitis cupiditate reprehenderit quasi error molestiae ex eveniet repellendus excepturi expedita molestias impedit explicabo magnam! Quas a ipsa, reiciendis itaque iure repellendus ea in perferendis tempora sequi aliquid nulla voluptatibus. Laborum fugit in totam nisi soluta quia perspiciatis id libero, corrupti maiores praesentium voluptate nulla! Laborum aut neque consequuntur nihil dolore deserunt eligendi repellat at. Fuga, doloribus! A, ab sequi modi eum dolore repellat quia commodi ex aut suscipit at labore ipsum praesentium nemo dignissimos repudiandae fugit, perferendis itaque vitae facilis alias? Reiciendis consequuntur harum perspiciatis soluta repudiandae eos dolorem quaerat perferendis, ex possimus. Optio odio voluptatem quas aut voluptate cupiditate at perferendis alias est saepe a harum dignissimos accusantium, nemo voluptatum officiis, tempora ad numquam maxime ratione iste ipsam. Beatae expedita itaque ducimus culpa. Placeat, delectus quos. Et, maxime. Porro repellendus hic facere tenetur veritatis maxime provident reiciendis rem distinctio odio incidunt eveniet nobis dignissimos ipsam reprehenderit, libero neque ratione aliquid, enim amet in debitis excepturi praesentium! Distinctio numquam voluptas sit ratione minima voluptates suscipit dignissimos maiores architecto excepturi accusantium ducimus voluptate porro enim voluptatem saepe, totam veniam adipisci iusto at est. Et sit voluptatem dolores quam, minima in vitae explicabo commodi, repellendus magnam dignissimos culpa. Enim eius magnam iste, consequatur rerum odit recusandae debitis quia inventore, voluptates voluptatibus labore mollitia, necessitatibus obcaecati? Aliquam recusandae iste earum. Dolorum exercitationem adipisci, labore officiis a quo? Consectetur voluptatem aliquid eligendi velit pariatur?</p>
+    </main>
+</body>
+</html>
