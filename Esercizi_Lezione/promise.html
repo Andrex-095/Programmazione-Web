@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" class="myButton">Click me</button>
+    <div class = "myRes"></div>
+</body>
+<script>
+    const myButton = document.querySelector('.myButton');
+    const myRes = document.querySelector('.myRes');
+
+    const buttExec = function(resolve, reject){
+        myButton.addEventListener('click', function(){
+            console.log('Button clicked');
+            resolve("Ciao");
+        });
+        setTimeout(function(){
+            console.log('Button clicked');
+            reject();
+        }, 5000);
+    };
+
+    const myProm = new Promise(buttExec);
+
+    myProm.then(
+        function(result){
+        myRes.innerHTML = "<p>Hai Vinto</p>" + result;
+        //return 10;
+        throw Error("Hai sbagliato");
+    }).then(function(res){
+        console.log("Seconda then " + res)
+    })
+    .catch(function(error){
+        myRes.innerHTML = "<p>Hai Perso</p>";
+    });
+</script>
+</html>
