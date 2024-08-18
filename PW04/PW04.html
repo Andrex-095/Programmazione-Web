@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esame 18 Luglio 2022</title>
+
+    <style>
+
+        html,body{
+            margin: 0 auto;
+        }
+
+        .container{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            min-width: 400px;
+        }
+
+        header, footer, main{
+            border: 1px solid blue;
+        }
+
+        main{
+            height: 80%;
+        }
+
+        header h1, footer{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        header, footer{
+            background-color: #f1f1f1;
+        }
+
+        @media(min-width: 600px){
+            html,body{
+                width: 500px;   
+            }
+        }
+
+        @media(min-width: 1000px){
+            html, body{
+                width: 800px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>Esame del 18 Luglio</h1>
+        </header>
+
+        <main>
+
+        </main>
+
+        <footer>
+            <p>Copyright</p>
+        </footer>
+
+    </div>
+
+    <script>
+        let variable;
+        function load(){
+            fetch("colori.json")
+            .then(response => {
+                if (!response) {
+                    throw new Error("Errore nella fetch");
+                }
+                return response.json(); //Passa la parte dei dati che compongono la risposta alla then successiva
+            })
+            .then(resp_data => {
+                variable = resp_data;
+                variable.forEach(element => {
+                    console.log(element);
+                })
+            })
+            .catch(error => {
+                console.error(error);
+            })
+        }
+
+        load();
+
+
+        const titolo = document.querySelector("header h1");
+        titolo.addEventListener("click", () =>{
+            const main = document.querySelector("main");
+            variable.forEach(element => {
+                let new_div = document.createElement("div");
+                new_div.style.width = '10vh';
+                new_div.style.height = '10vh';
+                new_div.style.backgroundColor = element.colore;
+                new_div.style.left = element.pos_orizz + '%';
+                new_div.style.top = element.pos_vert + '%';
+                new_div.style.position = 'absolute';
+                new_div.addEventListener("click", (el) => {
+                    el.target.remove()
+                })
+                main.appendChild(new_div);
+            })
+        })
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esame 1 Febbraio 2023</title>
+    <style>
+
+        html, body {
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        .container {
+            border: 1px solid green;
+            text-align: left;
+            margin-top: 20px;
+            width: 100%;
+            height: 45vh;
+        }
+
+        .container2 {
+            border: 1px solid red;
+            margin-top: 20px;
+            margin: 0 auto;
+            text-align: center;
+            width: 95%;
+            height: 45%;
+        }
+
+        
+        .quadrati {
+            margin-bottom: 10px;
+            margin-left: 15px;
+        }
+
+        .Titoli {
+            margin-left: 20px;
+        }
+
+        button {
+            text-align: center;
+            width: 25px;
+            height: 30px;
+            margin-left: 2px;
+            background-color: green;
+            color: white;
+            font-size: small;
+        }
+
+        .quadrati{
+            margin-left: 15px;
+        }
+
+        @media(min-width: 800px){
+            html, body{
+                width: 700px;
+            }
+
+            .container{
+                height: 55vh;
+            }
+
+            .container2 {
+                width: 95%;
+                height: 45%;
+            }
+
+            .container2 h1{
+                margin-top: 30px;
+                margin-bottom: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+
+        <div class="Titoli">
+            
+            <h1>Frasi del giorno</h1>
+
+            <p>Clicca per scoprire la frase</p>
+        
+        </div>
+    
+
+        <div class="quadrati">
+
+        <button><b>1</b></button>
+        <button><b>2</b></button>
+        <button><b>3</b></button>
+        <button><b>4</b></button>
+        <button><b>5</b></button>
+        <button><b>6</b></button>  
+        <button><b>7</b></button>
+        </div>
+
+        <div class="container2"></div>
+
+    </div>
+
+
+    <script>
+
+        const container2 = document.querySelector(".container2");
+
+        fetch("http://127.0.0.1:3000/citations")        //Effettua una richiesta HTTP GET all'indirizzo, aspetta che il server risponda con un JSON che contiene le frasi  
+
+
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Errore nella fetch");
+            }
+            return response.json();
+        })
+        .then(resp_data =>{
+            const array = [];       //Array vuoto per memorizzare le coppie di dati [ID, valore]
+            const arraydati = resp_data.data;   
+            arraydati.forEach(element => {
+                const coppia = [element.ID, element.valore];
+                array.push(coppia);
+            });
+            console.log(array);
+        })
+        .catch(error =>{
+            console.error(error);
+        })
+
+        const buttons = document.querySelectorAll("button");
+        buttons.forEach( button => {
+            button.addEventListener("click", function() {
+                const number = button.querySelector("b");
+                const id = parseInt(number.innerText);      //ID convertito ad un intero
+                fetch("http://127.0.0.1:3000/citations/" + id)  //altra richiesta con ID 
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Errore nella fetch");
+                    }
+                    return response.json();
+                })
+
+                .then(resp_data => {
+                    if(resp_data.status != "error"){
+                        container2.innerHTML = "<h1>" + (resp_data.data).frase + "</h1>";
+                        let myelement = document.createElement("h1");
+                        myelement.textContent = (resp_data.data).valore;
+                        container2.appendChild(myelement);
+                    }
+                    else {
+                        container2.innerHTML = "<h1>Non sono disponibili frasi </h1>";
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+            })
+        })
+
+    </script>
+</body>
+</html>

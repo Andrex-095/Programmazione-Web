@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esame del 28 Giugno 2024</title>
+
+    <style>
+
+        .container{
+            margin: 0 auto;
+            max-width: 960px;
+            background-color: #ffffff;
+            border: 1px solid #00796b;
+            font-family: Arial, sans-serif;
+        }
+
+        html, body{
+            margin: 0, auto;
+            background-color: #e0f7fa;
+            height: 100%;
+            width: 100%;
+        }
+
+
+        header {
+            border-bottom: 2px solid #00796b;
+            display: flex;
+            margin-right: 1%;
+            margin-left: 1%;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            
+        }
+
+        header h1{
+            text-align: left;
+            margin-left: 2%;
+        }
+
+        header .menu {
+            list-style: none;
+            /*text-align: right;*/
+            display: flex;
+            margin-left: 45%;
+            margin-top: 4%;
+        }
+
+        .container a{
+            color: #004d40;
+            text-decoration: none;
+            margin-left: 2%;
+            padding-right: 40px;
+        }
+
+
+        main{
+            display: flex;
+            border: 1px solid #00796b;
+            margin-right: 1%;
+            margin-left: 1%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        main .colonnaSx{
+            width: 30%;
+            border-right: 1px solid #00796b;
+        }
+
+        main .colonnaDx{
+            width: 80%;
+            margin-left: 5px;
+            margin-bottom: 5px;
+
+        }
+
+        main .aggiorna {
+            background-color: #00796b;
+            color: white;
+            padding: 10px;
+        }
+
+        footer{
+            height: 80px;
+            border-top: 2px solid #00796b;
+            margin-top: 20px;
+            margin-right: 1%;
+            margin-left: 1%;
+        }
+
+        @media(max-width: 1000px){
+            .container {
+                width: 700px;
+            }
+
+            
+            
+            .hamburger div{
+                width: 35px;
+                height: 5px;
+                background-color: black;
+                margin: 6px 0;
+            }
+            
+            .link{ 
+                display: none;
+            }
+        }
+
+    </style>
+
+
+</head>
+<body>
+    
+    <div class="container">
+        <header>
+
+            <h1>Logo</h1>
+
+            
+            <ul class="menu">
+                <a class = "link" href="">Home</a>
+                <a class = "link" href="">About</a>
+                <a class = "link" href="">Service</a>
+                <a class = "link" href="">Contact</a>
+           
+                <div class="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                
+            
+            </ul>
+
+        </header>
+
+        <main>
+            <section class="colonnaSx"></section>
+
+            <section class="colonnaDx">
+                
+                <h2>Dettagli</h2>
+                
+                <p>Seleziona una persona dalla lista per vedere i dettagli</p>
+
+                <button class="aggiorna">Aggiorna colori</button>
+
+            </section>
+        </main>
+
+        <footer>
+  
+
+
+        </footer>
+
+    </div>
+
+    <script>
+
+        function load(){
+            fetch("http://localhost:3000/persone")
+            .then(response =>{
+                if (!response) {
+                    throw new Error("Errore nella fetch");
+                }
+                return response.json();
+            })
+
+            .then( resp_data =>{
+                const colonnaSx = document.querySelector("main .colonnaSx");
+                const ul = document.createElement("ul");
+                (resp_data.dati).forEach(element=> {
+                    let li = document.createElement("li");
+                    li.innerHTML = element.nome + " " + element.cognome;
+
+                    li.addEventListener("click", () =>{
+                        alert("Nome: " + element.nome + " " + element.cognome + ", Età: " + element.età);
+                    })
+                    ul.appendChild(li);
+                });
+                colonnaSx.appendChild(ul);
+            })
+        }
+
+        load();
+
+        const button = document.querySelector("button");
+        button.addEventListener("click", () =>{
+            const body = document.querySelector("body");
+            const link = document.querySelectorAll("a");
+            body.style.backgroundColor = '#00796b';
+
+            let vettore_link = Array.from(link);
+
+            vettore_link.forEach(element => {
+                element.style.color = '#313131'
+            })
+        })
+        
+    </script>
+
+
+
+</body>
+</html>
