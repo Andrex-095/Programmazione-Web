@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body {
+            width: 900px;
+            margin: 0 auto;
+        }
+
+        .testi, ul {
+            display: flex;
+        }
+
+        header {
+            border: 1px solid gray;
+            margin-top:10px ;
+        }
+
+        menu {
+            padding: 0;
+            border: 1 px solid grey;
+        
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+        a {
+            margin-left: 5px;
+        }
+        
+        li {
+            width: 200px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border: 1px solid grey;
+        }
+
+        .content, .content h1 {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        article {
+            width: 33%;
+        }
+        
+        footer p {
+            border: 1px solid grey;
+        }
+
+        @media(max-width: 1000px) {
+            
+            html, body {
+                width: 400px;
+            }
+
+            .content h1 {
+                margin-top: 20px;
+            }
+
+            .testi{
+                flex-wrap: wrap;
+            }
+
+            ul {
+                flex-direction: column;
+            }
+
+            article {
+                width: 100%;
+             }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+
+        <h1>Example.com</h1>
+
+    </header>
+
+
+
+        
+
+    <div class="menu">
+
+        <p>MENU</p>
+            
+        <ul>
+            <li><a href="">Home Page</a></li>
+            <li><a href="">Informazioni</a></li>
+            <li><a href="">Prodotti</a></li>
+            <li><a href="">Contatti</a></li>
+        </ul>
+
+    </div>
+
+
+    
+
+    <main></main>
+
+    <content class="content">
+
+        <h1>Articoli</h1>
+
+        <div class="testi"></div>
+
+    </content>
+
+    <footer>
+
+        <p><a href="">Copyright-Example.com</a></p>
+
+    </footer>
+
+
+
+    <script>
+        function loadArticle(){
+            fetch("contenuti.json")
+            .then( response => {
+                if (!response.ok) {
+                    throw new Error("Errore nella fetch");
+                }
+                return response.json();
+            })
+            .then( resp_data => {
+                const testi = document.querySelector(".testi");
+                (resp_data).forEach(element => {
+                    const article = document.createElement("article");
+
+                    const h2 = document.createElement("h2");
+                    h2.textContent = element.titolo;
+
+                    const p = document.createElement("p");
+                    p.textContent = element.contenuto;
+
+                    article.appendChild(h2);
+                    article.appendChild(p);
+
+                    testi.appendChild(article)
+
+                })
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
+
+        loadArticle();
+        
+
+        let controllo = true; //Inizializzo variabile true 
+        const menu = document.querySelector(".menu p");
+        menu.addEventListener("click", () =>{      //Evento click sul testo menu 
+            if (window.innerWidth <= 1000)  {
+                scomparsa();
+            }
+        });
+
+        function scomparsa() {
+            const ul = document.querySelector("ul");
+            controllo = ! controllo;    //Ogni volta che è cliccato inverto il valore di controllo
+            if (!controllo) {
+                menu.style.color = "red";
+                ul.style.display = "none";
+            } else {
+                menu.style.color = "black";
+                ul.style.display = "flex";
+            }
+        }
+
+        window.addEventListener("resize", () => {
+            const ul = document.querySelector("ul");
+            if (window.innerWidth > 1000) {
+                ul.style.display = "flex";
+                menu.style.color = "black";
+                controllo = true;
+            }
+        });
+
+
+        const articoli = document.querySelector(".content h1");
+        articoli.addEventListener("click", () => {
+            let vettore_articoli = Array.from(document.querySelectorAll(".content article"));
+            shuffle(vettore_articoli);
+            const testi = document.querySelector(".testi");
+
+            vettore_articoli.forEach(element => {
+                testi.appendChild(element);
+            })
+        });
+
+        function shuffle(array) {
+            array.sort( () => Math.random() - 0.5 );
+        }
+    </script>
+</body>
+</html>
